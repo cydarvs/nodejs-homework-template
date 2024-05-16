@@ -1,11 +1,22 @@
 import express from "express";
+import { ctrlWrapper } from "../../helpers/ctrlWrapper.js";
 // prettier-ignore
-import {listContacts, getContactById, removeContact, addContact, updateContact} from "../../models/contacts.js";
+// import {listContacts, getContactById, removeContact, addContact, updateContact} from "../../models/contacts.js";
+import { getAllContacts, getContactsById, addContact } from "../../controllers/contactsController.js";
+//  , removeContact, , updateContact
+// import { getAllContacts, getContactsById, addContact, deleteContact, updateContactById} from "../../controllers/contactsController.js";
+
 import { contactValidation } from "../../validations/validation.js";
 import { httpError } from "../../helpers/httpError.js";
 
 const router = express.Router();
 
+router.get("/", ctrlWrapper(getAllContacts));
+
+router.get("/:contactId", ctrlWrapper(getContactsById));
+
+
+/*
 router.get("/", async (req, res, next) => {
   try {
     const result = await listContacts();
@@ -82,6 +93,6 @@ router.put("/:contactId", async (req, res, next) => {
     next(error);
   }
 });
-
+*/
 // module.exports = router;
 export { router };
