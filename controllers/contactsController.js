@@ -4,19 +4,9 @@ import { nanoid } from "nanoid";
 // import fs from "fs/promises";
 // import path from "path";
 
-
-
-// const contactsPath = path.join("models", "contacts.json");
-
-// const getAllContacts = async () => {
-//   const contacts = await fs.readFile(contactsPath);
-//   return JSON.parse(contacts);
-// };
-
 const getAllContacts = (_req, res) => {
   res.json(contactData);
 };
-
 
 const getContactsById = (req, res) => {
   const { contactId } = req.params;
@@ -32,54 +22,34 @@ const getContactsById = (req, res) => {
 };
 
 const addContact = (req, res) => {
-  const { name, email } = req.body;
+  const { name, email, phone } = req.body;
   const newContact = { id: nanoid(), name, email, phone };
+  
+  console.log(newContact);
+
   contactData.push(newContact);
-  res.status(201).json(newContact);
-};
-
-/*
-const getContactsById = (req, res) => {
-  const { contactId } = req.params;
-  const contact = mockData.find(
-    (contact) => contact.id === parseInt(contactId)
-  );
-
-  if (!contact) {
-    throw httpError(404, "Contact ID Not Found");
-  }
-
-  res.json(contact);
-};
-
-const addContact = (req, res) => {
-  const { name, email } = req.body;
-  const newContact = { id: mockData.length + 1, name, email };
-  mockData.push(newContact);
   res.status(201).json(newContact);
 };
 
 const deleteContact = (req, res) => {
   const { contactId } = req.params;
-  mockData.filter((contact) => contact.id !== parseInt(contactId));
+  contactData.filter((contact) => contact.id !== (contactId));
   res.json({ message: "Contact deleted" });
 };
 
 const updateContactById = (req, res) => {
   const { contactId } = req.params;
-  const { name, email } = req.body;
-  const index = mockData.findIndex(
-    (contact) => contact.id === parseInt(contactId)
+  const { name, email, phone } = req.body;
+  const index = contactData.findIndex(
+    (contact) => contact.id === (contactId)
   );
   if (index === -1) {
     throw httpError(404, "Contact ID Not Found");
   }
 
-  mockData[index] = { ...mockData[index], name, email };
-  res.json(mockData[index]);
+  contactData[index] = { ...contactData[index], name, email, phone };
+  res.json(contactData[index]);
 };
-*/
 
 // prettier-ignore
-// getContactsById, addContact, deleteContact, updateContactById
-export { getAllContacts, getContactsById, addContact };
+export { getAllContacts, getContactsById, addContact, deleteContact, updateContactById };

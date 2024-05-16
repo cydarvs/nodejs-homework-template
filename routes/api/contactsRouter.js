@@ -1,98 +1,28 @@
 import express from "express";
 import { ctrlWrapper } from "../../helpers/ctrlWrapper.js";
 // prettier-ignore
-// import {listContacts, getContactById, removeContact, addContact, updateContact} from "../../models/contacts.js";
-import { getAllContacts, getContactsById, addContact } from "../../controllers/contactsController.js";
-//  , removeContact, , updateContact
-// import { getAllContacts, getContactsById, addContact, deleteContact, updateContactById} from "../../controllers/contactsController.js";
+
+import { getAllContacts, getContactsById, addContact, deleteContact, updateContactById } from "../../controllers/contactsController.js";
 
 import { contactValidation } from "../../validations/validation.js";
 import { httpError } from "../../helpers/httpError.js";
 
 const router = express.Router();
 
+// Get All Contacts
 router.get("/", ctrlWrapper(getAllContacts));
 
+// GEt Contact By ID
 router.get("/:contactId", ctrlWrapper(getContactsById));
 
+// Add Contact
+router.post("/", ctrlWrapper(addContact));
 
-/*
-router.get("/", async (req, res, next) => {
-  try {
-    const result = await listContacts();
-    res.json(result);
-  } catch (error) {
-    next(error);
-  }
-});
+// Delete Contact
+router.delete("/:contactId", ctrlWrapper(deleteContact));
 
-router.get("/:contactId", async (req, res, next) => {
-  try {
-    const { contactId } = req.params;
-    const result = await getContactById(contactId);
+// Update Contact
+router.put("/:contactId", ctrlWrapper(updateContactById));
 
-    if (!result) {
-      throw httpError(404);
-    }
-
-    res.json(result);
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.post("/", async (req, res, next) => {
-  try {
-    // Preventing lack of necessary data
-    const { error } = contactValidation.validate(req.body);
-    if (error) {
-      throw httpError(400, "missing required name field");
-    }
-
-    const result = await addContact(req.body);
-    res.status(201).json(result);
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.delete("/:contactId", async (req, res, next) => {
-  try {
-    const { contactId } = req.params;
-    const result = await removeContact(contactId);
-
-    if (!result) {
-      throw httpError(404);
-    }
-
-    res.json({
-      message: "Contact deleted",
-    });
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.put("/:contactId", async (req, res, next) => {
-  try {
-    // Preventing lack of necessary data
-    const { error } = contactValidation.validate(req.body);
-    if (error) {
-      throw httpError(400, "missing fields");
-    }
-
-    const { contactId } = req.params;
-    const result = await updateContact(contactId, req.body);
-
-    if (!result) {
-      throw httpError(404);
-    }
-
-    res.json(result);
-  } catch (error) {
-    next(error);
-  }
-});
-*/
 // module.exports = router;
 export { router };
