@@ -9,6 +9,7 @@ import logger from "morgan";
 import cors from "cors";
 
 import { router as contactsRouter } from "./routes/api/contactsRouter.js";
+import { router as usersRouter } from "./routes/api/usersRouter.js";
 
 // Initializes a new Express application
 const app = express();
@@ -23,6 +24,7 @@ app.use(express.json()); // Parses incoming requests with JSON payloads.
 
 // Mounts the contactsRouter on the /api/contacts path. Any request to /api/contacts will be handled by the contactsRouter.
 app.use("/api/contacts", contactsRouter);
+app.use("/api/users", usersRouter);
 
 // This middleware handles requests that do not match any route. It responds with a 404 status code 
 // and a JSON message indicating that the resource was not found.
