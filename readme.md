@@ -21,3 +21,11 @@ Forking will create a repository on your http://github.com account.
 - .usersController.js
 - bcrypt, jsonwebtoken
 - authenticateToken middleware
+
+## Note HW5
+1. serve static files (app.js)
+2. avatarURL(string) in schema
+3. gravatar package to generate a default avatar url
+4. updateAvatar Controller PATCH /users/avatars
+5. jimp package for processing images
+6. multer package for accepting multipart/form-data encoding type to send files (upload.js middleware; usage on usersRouter.js)

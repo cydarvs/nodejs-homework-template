@@ -22,6 +22,10 @@ app.use(logger(formatsLogger)); // logger(formatsLogger): Uses the morgan logger
 app.use(cors());  // cors(): Enables CORS for all routes by default.
 app.use(express.json()); // Parses incoming requests with JSON payloads.
 
+// tells Express to serve static files from the public directory)
+// open http://localhost:3000/avatars/665c98dca10f7f28dc9eb8b2.jpeg on browser
+app.use(express.static("public"));
+
 // Mounts the contactsRouter on the /api/contacts path. Any request to /api/contacts will be handled by the contactsRouter.
 app.use("/api/contacts", contactsRouter);
 app.use("/api/users", usersRouter);
